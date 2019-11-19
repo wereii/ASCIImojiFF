@@ -13,7 +13,7 @@ function createWordMenuTitle(word, ascii) {
 
 function setupContextMenus() {
   // chrome.runtime.onInstalled.addListener(function() {
-  Object.values(dict).map(function (entry) {
+  Object.values(dict).map(function(entry) {
     var word = entry.words[0];
     var startingLetter = word[0];
 
@@ -32,7 +32,7 @@ function setupContextMenus() {
     id: "parent"
   });
 
-  letters.map(function (letter) {
+  letters.map(function(letter) {
     var letterDict = dictByLetter[letter];
     if (letterDict) {
       chrome.contextMenus.create(
@@ -42,13 +42,14 @@ function setupContextMenus() {
           parentId: "parent",
           id: "letter_" + letter
         },
-        function () {
-          letterDict.map(function (entry) {
+        function() {
+          letterDict.map(function(entry) {
             chrome.contextMenus.create({
               title: createWordMenuTitle(entry[0], entry[1]),
               contexts: contexts,
-              onclick: function (info, tab) {
-                chrome.tabs.sendMessage(tab.id, entry[1]);
+              onclick: function(info, tab) {
+                console.log("tab: "+tab.id);
+                browser.tabs.sendMessage(tab.id, entry[1]);
               },
               parentId: "letter_" + letter,
               id: "word_" + entry[0]
@@ -72,4 +73,4 @@ function init(result) {
 }
 
 // load storage and initialize
-chrome.storage.sync.get(init);
+browser.storage.sync.get().then(init);

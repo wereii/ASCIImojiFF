@@ -90,7 +90,7 @@ $(function () {
     $("#builtin-count").text("(" + builtinCount + ")");
   }
 
-  chrome.storage.sync.get(loadStorage);
+  browser.storage.sync.get().then(loadStorage);
 
   function displayEmoticons(table, dictionary, allowDelete) {
     for (var hash in dictionary) {
@@ -126,7 +126,7 @@ $(function () {
   });
 
   function saveSettings() {
-    chrome.storage.sync.set(storage, function () {
+    browser.storage.sync.set(storage).then(function () {
       $("#message").html('<span id="message_content">Settings saved.</span>');
       $("#message_content").fadeIn("slow");
       setTimeout(function () {
@@ -170,7 +170,7 @@ $(function () {
     if (confirm("Do you really want to delete this emoticon?")) {
       row.remove();
       delete storage.dictionary[hash];
-      chrome.storage.sync.set(storage);
+      browser.storage.sync.set(storage);
       customCount();
     }
   });

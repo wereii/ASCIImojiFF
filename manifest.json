@@ -1,7 +1,15 @@
 {
+   "description": "Asciify ALL the websites! (Firefox port)",
+   "manifest_version": 2,
+   "name": "ASCIImoji",
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png",
+      "48": "images/icon-48.png"
+   },
    "background": {
       "scripts": [
-         "js/jquery-2.1.1.min.js",
+         "js/jquery-3.4.1.min.js",
          "js/asciimoji.js",
          "js/background.js"
       ]
@@ -10,25 +18,27 @@
       {
          "all_frames": true,
          "js": [
-            "js/jquery-2.1.1.min.js",
+            "js/jquery-3.4.1.min.js",
             "js/asciimoji.js",
             "js/asciimoji.jquery.js",
             "js/script.js"
          ],
          "matches": [
-            "\u003Call_urls>"
+            "<all_urls>"
          ]
       }
    ],
-   "description": "Asciify ALL the websites!",
-   "icons": {
-      "128": "images/icon-128.png",
-      "16": "images/icon-16.png",
-      "48": "images/icon-48.png"
+   "browser_specific_settings": {
+      "gecko": {
+         "id": "addon@example.com",
+         "strict_min_version": "70.0"
+      }
    },
-   "manifest_version": 2,
-   "name": "ASCIImoji",
-   "options_page": "options/index.html",
+   "options_ui": {
+      "page": "options/index.html",
+      "browser_style": true,
+      "open_in_tab":true
+    },
    "permissions": [
       "storage",
       "tabs",
@@ -36,6 +46,5 @@
       "https://*/*",
       "contextMenus"
    ],
-   "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.5.0"
+   "version": "ff1.5.0"
 }

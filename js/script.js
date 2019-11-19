@@ -11,8 +11,8 @@ function init(result) {
   storage.settings = Object.assign({}, defaultSettings, result.settings);
   storage.dictionary = Object.assign({}, result.dictionary);
 
-  elems.forEach(function (elem) {
-    $(document).on("input paste click", elem, function () {
+  elems.forEach(function(elem) {
+    $(document).on("input paste click", elem, function() {
       $(this).asciimoji(storage.settings, storage.dictionary);
     });
   });
@@ -22,13 +22,13 @@ var selectedElement = null;
 
 document.addEventListener(
   "mousedown",
-  function (event) {
+  function(event) {
     selectedElement = event.target;
   },
   true
 );
 
-chrome.extension.onMessage.addListener(function (ascii) {
+browser.runtime.onMessage.addListener(function(ascii) {
   if (selectedElement) insertAtCursor(selectedElement, ascii);
 });
 
@@ -58,4 +58,4 @@ function replaceInString(str, newStr, start, end) {
 }
 
 // load storage and initialize
-chrome.storage.sync.get(init);
+browser.storage.sync.get().then(init);
