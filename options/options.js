@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
   // document.ready
 
   var storage = {
@@ -31,19 +31,19 @@ $(function() {
           : "";
     asciiStr = typeof ascii == "function" ? ascii() : ascii;
 
-    words.forEach(function(w) {
+    words.forEach(function (w) {
       if (deleteButton === true) {
         deleteButtonHTML =
           '<button type="button" class="pure-button pure-button-error pure-button-xsmall fr delete-button" title="delete">✖</button>';
       }
       wordsHTML.push(
         '<span class="prefix">' +
-          settings.prefix +
-          "</span>" +
-          w +
-          '<span class="suffix">' +
-          settings.suffix +
-          "</span>"
+        settings.prefix +
+        "</span>" +
+        w +
+        '<span class="suffix">' +
+        settings.suffix +
+        "</span>"
       );
     });
 
@@ -51,15 +51,15 @@ $(function() {
       .find("tbody")
       .append(
         '<tr data-hash="' +
-          hash +
-          '"><td>' +
-          wordsHTML.join("<br>") +
-          interactive +
-          '</td><td><span class="ascii fl">' +
-          asciiStr +
-          "</span>" +
-          deleteButtonHTML +
-          "</td></tr>"
+        hash +
+        '"><td>' +
+        wordsHTML.join("<br>") +
+        interactive +
+        '</td><td><span class="ascii fl">' +
+        asciiStr +
+        "</span>" +
+        deleteButtonHTML +
+        "</td></tr>"
       );
 
     customCount();
@@ -107,43 +107,43 @@ $(function() {
   }
 
   // instantly update emoticon lists when prefix/suffix changes
-  $("#prefix").on("input paste", function() {
+  $("#prefix").on("input paste", function () {
     $(".prefix").html($(this).val());
     storage.settings.prefix = $(this).val();
     saveSettings();
   });
 
-  $("#suffix").on("input paste", function() {
+  $("#suffix").on("input paste", function () {
     $(".suffix").html($(this).val());
     storage.settings.suffix = $(this).val();
     saveSettings();
   });
 
   // contextmenu setting
-  $("#context-menu-enabled").on("change", function() {
+  $("#context-menu-enabled").on("change", function () {
     storage.settings.contextMenu = $(this).is(":checked");
     saveSettings();
   });
 
   function saveSettings() {
-    chrome.storage.sync.set(storage, function() {
+    chrome.storage.sync.set(storage, function () {
       $("#message").html('<span id="message_content">Settings saved.</span>');
       $("#message_content").fadeIn("slow");
-      setTimeout(function() {
+      setTimeout(function () {
         $("#message_content").fadeOut("slow");
       }, 5000);
     });
   }
 
   // make add emoticon button work
-  $("#add-emoticon").click(function() {
+  $("#add-emoticon").click(function () {
     var words = $("#add-text")
-        .val()
-        .split(","),
+      .val()
+      .split(","),
       ascii = $("#add-ascii").val();
 
     if (words.length > 0 && ascii.length > 0) {
-      words.map(function(word) {
+      words.map(function (word) {
         word = word.trim();
       });
 
@@ -153,7 +153,7 @@ $(function() {
         ascii: ascii
       };
 
-      chrome.storage.sync.set(storage, function() {
+      chrome.storage.sync.set(storage, function () {
         $("#add-text").val("");
         $("#add-ascii").val("");
         $("#no-custom-emoticons").remove();
@@ -164,7 +164,7 @@ $(function() {
   });
 
   // make delete emoticon buttons work
-  $(document).on("click", ".delete-button", function() {
+  $(document).on("click", ".delete-button", function () {
     var row = $(this).parents("tr"),
       hash = row.data("hash");
     if (confirm("Do you really want to delete this emoticon?")) {
