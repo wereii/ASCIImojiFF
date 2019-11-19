@@ -1,6 +1,6 @@
 # ASCIImojiFF
 
-This is "port fork" of https://github.com/hpcodecraft/ASCIImoji for Firefox
+This is "port fork" of http://asciimoji.com/ for Firefox
 
 ### What? Why?
 
