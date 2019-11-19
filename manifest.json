@@ -1,0 +1,22 @@
+{
+   "background": {
+      "scripts": [ "js/jquery-2.1.1.min.js", "js/asciimoji.js", "js/background.js" ]
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "js/jquery-2.1.1.min.js", "js/asciimoji.js", "js/asciimoji.jquery.js", "js/script.js" ],
+      "matches": [ "\u003Call_urls>" ]
+   } ],
+   "description": "Asciify ALL the websites!",
+   "icons": {
+      "128": "images/icon-128.png",
+      "16": "images/icon-16.png",
+      "48": "images/icon-48.png"
+   },
+   "manifest_version": 2,
+   "name": "ASCIImoji",
+   "options_page": "options/index.html",
+   "permissions": [ "storage", "tabs", "http://*/*", "https://*/*", "contextMenus" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.5.0"
+}
